@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+
+
+
+<div class="w-full md:w-2/3 flex flex-col items-center px-3">
+<div class="rounded rounded-t-lg overflow-hidden shadow w-full my-3">
+	
+  	<img src="https://i.imgur.com/dYcYQ7E.png" class="w-full" />
+  	
+    <div class="flex justify-center -mt-8">
+    	{%  if user.profile.profile_pic %}
+        <img src="{{ user.profile.profile_pic.url }}"  class="rounded-full border-solid border-white border-2 -mt-3 max-w-sm">
+        {% else %}
+        <img src="media/images/unknown.jpg" class="rounded-full border-solid border-white border-2 -mt-3">
+       {% endif %}
+    </div>
+	<div class="text-center px-3 pb-6 pt-2">
+		<h3 class="text-black text-sm bold font-sans">{{ user.username }}</h3>
+		<p class="mt-2 font-sans font-light text-grey-dark">{{ user.profile.bio }}</p>
+		<p class="mt-2 font-sans font-light text-grey-dark">{{ user.profile.location }}</p>
+		<p class="mt-2 font-sans font-light text-grey-dark">Birthday: {{ user.profile.birth_date }}</p>
+	</div>
+  	<div class="flex justify-center pb-3 text-grey-dark">
+      <div class="text-center mr-3 border-r pr-3">
+        <h2>34</h2>
+        <span>Photos</span>
+      </div>
+      <div class="text-center">
+        <h2>42</h2>
+        <span>Friends</span>
+      </div>
+  	</div>
+    
+    <a href="{% url 'edit_profile' %}">
+	
+<button type="submit">Edit profile</button>
+</a>
+
+</div>
+</div>
+
+
+{% endblock %}

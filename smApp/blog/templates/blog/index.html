@@ -1,0 +1,64 @@
+{% extends 'blog/base.html' %}
+<!--
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Virtual Cafe</title>
+
+</head>
+<body>
+	<div> <a href ="{% url 'post_new' %}">New Feed</a>
+ {% if posts %}
+ {% for p in posts %}
+ <h1>{{p.title}}</h1>
+ {% if p.image %}
+ <div><img src="{{ p.image.url }}"></div>
+ {% endif %}
+ <p>{{p.text}}</p>
+ <h3>-{{ p.author }}</h3>
+ {% endfor %}
+ {% endif %}
+-->
+
+
+{% block content %}
+
+
+ 
+        <!-- Posts Section -->
+        <section class="w-full md:w-2/3 flex flex-col items-center px-3">
+           {% if posts %}
+            {% for p in posts %}
+            <article class="flex flex-col shadow my-4 w-11/12">
+                <!-- Article Image -->
+                {% if p.image %}
+                <a href="{% url 'feed_detail' pk=p.pk %}" class="hover:opacity-75">
+                    <img  class="object-cover h-64 w-full ..."  src="{{ p.image.url }}">
+                </a>
+                {% endif %}
+                <div class="bg-white flex flex-col justify-start p-6">
+                   
+                    <a href="{% url 'feed_detail' pk=p.pk %}" class="text-3xl font-bold hover:text-gray-700 pb-4">{{p.title}}</a>
+                    <a href="{% url 'feed_detail' pk=p.pk %}" class="pb-6">{{ p.text }}</a>
+                    <a href="#" class="text-sm pb-3">
+                        <p class="font-semibold hover:text-gray-800"> <i class='fas fa-user-astronaut'></i> {{ p.author }}</p>{{ p.published_date}}
+                    </a>
+                    
+                    <a href="{% url 'feed_detail' pk=p.pk %}"><i class='far fa-comment'></i> Comments: {{ p.comments.count }}</a>
+                    <a href="{% url 'feed_detail' pk=p.pk %}" class="uppercase text-gray-800 over:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            {% endfor %}
+            {% endif %}
+           
+            <!-- Pagination 
+            <div class="flex items-center py-8">
+                <a href="#" class="h-10 w-10 bg-blue-800 hover:bg-blue-600 font-semibold text-white text-sm flex items-center justify-center">1</a>
+                <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:bg-blue-600 hover:text-white text-sm flex items-center justify-center">2</a>
+                <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:text-gray-900 text-sm flex items-center justify-center ml-3">Next <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+             -->
+        </section>  
+ {% endblock %}
+

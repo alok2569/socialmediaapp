@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<div class="main">
+	<form method="POST">
+		{% csrf_token %}
+	<h3> Are you sure want to delete this feed ?</h3>
+	<input type="submit" value="Yes">
+	<a href='/'>Cancel</a>
+
+</form>
+</div>
+</body>
+</html>

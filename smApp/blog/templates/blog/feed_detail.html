@@ -1,0 +1,129 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<div class='post'>
+
+
+            <article class="flex flex-col shadow my-4">
+                <!-- Article Image -->
+                {% if post.image %}
+                <p class="hover:opacity-75">
+                    <img class="object-contain h-64 w-full ..." src="{{ post.image.url }}">
+                </p>
+                {% endif %}
+                <div class="bg-white flex flex-col justify-start p-6">
+                   
+                    <p class="text-3xl font-bold hover:text-gray-700 pb-4">{{post.title}}</p>
+                    <p class="pb-6">{{ post.text }}</p>
+                    <p class="text-sm pb-3">
+                        By <a href="#" class="font-semibold hover:text-gray-800">{{ post.author }}</a> {{ post.published_date}}
+                    </p>
+                    
+                </div>
+            <div class='align-right'>
+              {% if user.is_authenticated %}
+                <form method="POST" action="delete">
+                  {% csrf_token %}
+                  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Delete this feed</button>
+                </form> 
+                <form method="POST" action="edit">
+                  {% csrf_token %}
+                  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
+                </form> 
+              {% endif %}
+            </div>
+                <hr>
+            
+
+
+             
+
+ <!--               <div class="bg-grey p-5">
+<div class="max-w-xs mx-auto mt-10"> 
+  <div class="bg-white p-5 modal__content rounded">
+
+    
+        
+      <div class="flex relative mt-6">
+  
+        <div class=" ml-2 "> 
+            {% for c in post.comments.all %}
+          <p class="font-medium text-sm text-grey-darkest font-bold">{{ c.author }}</p>
+          <p class="text-grey-dark text-xs ">{{ c.text|linebreaks }}</p>
+           <div class="date">{{ c.created_date }}</div>
+
+
+           {% empty %}
+            <p> No comments yet!!</p>
+            {% endfor %}
+        </div>
+      
+      </div>
+     
+    <div class="modal__footer mt-6">
+        <div class="modal__body">
+      <p class="text-grey-darkest font-medium mb-1 text-base"> Leave a Comment</p>
+      
+      <div class="mt-4 border border-grey w-full border-1 rounded p-2 relative focus:border-red">
+        <form method="POST" class="post-form">
+                {% csrf_token %}
+             {{ commentform.as_p }}
+        <div class="text-right">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Send</button>
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+    
+</div>
+</div>
+</div>
+      
+-->
+
+
+
+
+              {% for c in post.comments.all %}
+                     <div class="comment">
+                    
+                        <strong> {{ c.author }}</strong>    
+                        <p>{{ c.text|linebreaks }}</p>
+                        <div class="date">{{ c.created_date }}</div>
+                    </div>
+                {% empty %}
+                  <p> No comments yet!!</p>
+                  {% endfor %}
+                  <br>
+                  <hr>
+                  <hr>
+                  <br>
+                {% if user.is_authenticated %}
+              <p class="text-grey-darkest font-medium mb-1 text-base"> Leave a Comment below</p>
+              <form method="POST" class="post-form">
+                {% csrf_token %}
+          <!--    <label class="block">
+               <span class="text-gray-700">Name</span>
+               <input class="form-input mt-1 block w-64 h-8" placeholder="Enter your name" name='author' >
+              </label> -->
+
+              <label class="block">
+              <span class="text-gray-700">Comment</span>
+                <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Your comment." name="text"></textarea>
+              </label>
+             <div class="text-center">
+              <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Send</button>
+          </div>
+              </form>  
+              {% endif %}
+            </article>
+ 
+
+</div>
+
+
+{% endblock %}
+
+

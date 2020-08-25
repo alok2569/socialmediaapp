@@ -55,7 +55,8 @@ def feed_edit(request,pk):
 	return render(request,'blog/feed-edit.html',{'post':post})
 
 def profile(request):
-	return render(request,'blog/profile.html') 
+	post = Post.objects.all()
+	return render(request,'blog/profile.html',{'post':post}) 
 
 def edit_profile(request):
 	if request.method == "POST":

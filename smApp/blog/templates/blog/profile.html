@@ -7,35 +7,43 @@
 <div class="w-full md:w-2/3 flex flex-col items-center px-3">
 <div class="rounded rounded-t-lg overflow-hidden shadow w-full my-3">
 	
-  	<img src="https://i.imgur.com/dYcYQ7E.png" class="w-full" />
+  	<img src="https://images.all-free-download.com/images/graphiclarge/blue_abstract_background_310971.jpg" class="w-full h-64" />
   	
     <div class="flex justify-center -mt-8">
     	{%  if user.profile.profile_pic %}
-        <img src="{{ user.profile.profile_pic.url }}"  class="rounded-full border-solid border-white border-2 -mt-3 max-w-sm">
+        <img src="{{ user.profile.profile_pic.url }}"  class="rounded-full border-solid border-white border-2 -mt-3 max-w-xs">
         {% else %}
-        <img src="media/images/unknown.jpg" class="rounded-full border-solid border-white border-2 -mt-3">
+        <img src="media/images/unknown.jpg" class="rounded-full border-solid border-white border-2 -mt-3 max-w-sm">
        {% endif %}
     </div>
 	<div class="text-center px-3 pb-6 pt-2">
-		<h3 class="text-black text-sm bold font-sans">{{ user.username }}</h3>
+		<h3 class="text-black text-3xl bold font-sans">{{ user.username }}</h3>
 		<p class="mt-2 font-sans font-light text-grey-dark">{{ user.profile.bio }}</p>
-		<p class="mt-2 font-sans font-light text-grey-dark">{{ user.profile.location }}</p>
+    {% if user.profile.location %}
+		<p class="mt-2 font-sans font-light text-grey-dark"><i class='fas fa-map-marker-alt'></i>{{ user.profile.location }}</p>
+    {% endif %}
 		<p class="mt-2 font-sans font-light text-grey-dark">Birthday: {{ user.profile.birth_date }}</p>
 	</div>
   	<div class="flex justify-center pb-3 text-grey-dark">
       <div class="text-center mr-3 border-r pr-3">
-        <h2>34</h2>
-        <span>Photos</span>
+        <h2>Your Posts <i class='far fa-hand-point-right'></i></h2>
+       
+        
       </div>
-      <div class="text-center">
-        <h2>42</h2>
-        <span>Friends</span>
+      <div class="text-left">
+         {% for p in post %}
+           {% if p.author == request.user %}
+           
+            <a href="{% url 'feed_detail' pk=p.pk %}" class="hover:bg-blue-500">{{ p.title }}</a>
+            <br>
+            {% endif %}
+        {% endfor %}
       </div>
   	</div>
     
     <a href="{% url 'edit_profile' %}">
 	
-<button type="submit">Edit profile</button>
+<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Edit profile</button>
 </a>
 
 </div>

@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+{% for p in sr %}
+<article class="flex flex-col shadow my-4 w-11/12">
+                <!-- Article Image -->
+                {% if p.image %}
+                <a href="{% url 'feed_detail' pk=p.pk %}" class="hover:opacity-75">
+                    <img  class="object-cover h-64 w-full ..."  src="{{ p.image.url }}">
+                </a>
+                {% endif %}
+                <div class="bg-white flex flex-col justify-start p-6">
+                   
+                    <a href="{% url 'feed_detail' pk=p.pk %}" class="text-3xl font-bold hover:text-gray-700 pb-4">{{p.title}}</a>
+                    <a href="{% url 'feed_detail' pk=p.pk %}" class="truncate pb-6">{{ p.text }}</a>
+                    <div class="flex justify-between">
+                        <div class="text-center font-semibold hover:text-gray-800 text-sm pb-3"> <i class='fas fa-user-astronaut'></i> {{ p.author }}
+                        </div>
+                     <div class="text-center" ><i class='far fa-comment'></i> Comments: {{ p.comments.count }}</div>
+                        </div>
+
+                     <div class="flex justify-start text-sm italic font-hairline ">
+                      {{ p.published_date}} </div>
+                       
+                    
+                    
+                    <a href="{% url 'feed_detail' pk=p.pk %}" class="flex justify-end uppercase text-gray-800 over:text-black">Continue Reading <i class="fas fa-arrow-right"></i></a>
+                
+                </div>
+            </article>
+
+{% endfor %}
+{% endblock %}

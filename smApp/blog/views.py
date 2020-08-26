@@ -4,6 +4,7 @@ from .models import Post,comment,Profile
 from .forms import PostFeed,CommentForm,UserForm,ProfileForm
 from django.contrib.auth.models import User
 from django.contrib import messages 
+from django.db.models import Q
 
 def feeds(request):
 	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -73,3 +74,14 @@ def edit_profile(request):
 		userform = UserForm(instance=request.user)
 		profileform = ProfileForm(instance=request.user.profile)
 	return render(request,'blog/edit_profile.html',{'userform':userform,'profileform':profileform})
+
+def search(request):
+	item = request.GET.get('item')
+	if item:
+		exists = Post.objects.filter(Q(title__istartswith = item))
+		if exists:
+			return render(request,'blog/search.html',{'sr':exists})
+		else:
+			messages.info(request,'No results found')
+	else:
+		return render(request, 'blog/search.html')

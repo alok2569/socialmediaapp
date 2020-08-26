@@ -9,4 +9,5 @@ path('feed_detail/<int:pk>/delete',views.delete_feed,name='delete_feed'),
 path('feed_detail/<int:pk>/edit',views.feed_edit,name='feed_edit'),
 path('profile',views.profile,name='profile'),
 path('profile/edit',views.edit_profile,name='edit_profile'),
+path('search/',views.search,name='search'),
 ]

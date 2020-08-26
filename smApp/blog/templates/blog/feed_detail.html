@@ -2,7 +2,7 @@
 {% block content %}
 
 
- <section class="w-full md:w-2/3 flex flex-col items-center px-3">
+ <section class="w-full md:w-2/3 flex flex-col items-center rounded-md px-3">
 
             <article class="flex flex-col shadow my-4 w-11/12">
                 <!-- Article Image -->
@@ -15,10 +15,10 @@
                    
                     <p class="text-3xl font-bold hover:text-gray-700 pb-4">{{post.title}}</p>
                     <p class="pb-6">{{ post.text }}</p>
-                    <p class="text-base pb-3">
+                    <div class="text-base">
                         By <a href="#" class="font-semibold hover:text-gray-800">{{ post.author }}</a> 
-                    </p>
-                    <p class="text-sm"> {{ post.published_date}} </p>
+                    </div>
+                    <div class="text-sm"> {{ post.published_date }} </div>
                     
                 </div>
             <div class='align-right'>
@@ -109,6 +109,7 @@
                   <br>
                 {% if user.is_authenticated %}
               <p class="text-grey-darkest font-medium mb-1 text-base"> Leave a Comment below</p>
+              <hr>
               <form method="POST" class="post-form">
                 {% csrf_token %}
           <!--    <label class="block">
@@ -120,6 +121,7 @@
              
                 <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Your comment." name="text"></textarea>
               </label>
+              <hr>
              <div class="text-center">
               <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><i class='far fa-paper-plane'></i> Send</button>
           </div>

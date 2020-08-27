@@ -82,6 +82,5 @@ def search(request):
 		if exists:
 			return render(request,'blog/search.html',{'sr':exists})
 		else:
-			messages.info(request,'No results found')
-	else:
-		return render(request, 'blog/search.html')
+			messages.info(request,'No results found!!')
+	return render(request, 'blog/search.html')
